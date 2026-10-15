@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070B1F">
+<title>Portal Semakan PIN Guru & AKP SKTKK</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --bg:#070B1F; --card:#0E1433; --field:#0A0F29; --line:#2A3366;
+    --text:#EEF2FF; --muted:#AEB7E6;
+    --blue:#2563EB; --violet:#7C3AED; --sky:#7DD3FC; --lilac:#C4B5FD;
+  }
+  html,body{font-family:'Sora',system-ui,-apple-system,'Segoe UI',sans-serif;}
+  body{
+    background:
+      radial-gradient(60rem 40rem at 10% -10%, rgba(37,99,235,.28), transparent 60%),
+      radial-gradient(50rem 36rem at 100% 110%, rgba(124,58,237,.30), transparent 60%),
+      var(--bg);
+    color:var(--text);
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(125,140,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(125,140,255,.06) 1px,transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+            mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+  }
+  .card{
+    position:relative;background:var(--card);border-radius:1.25rem;
+    border:1px solid transparent;
+    background-image:linear-gradient(var(--card),var(--card)),linear-gradient(135deg,#3B82F6,#7C3AED);
+    background-origin:border-box;background-clip:padding-box,border-box;
+    box-shadow:0 0 0 1px rgba(255,255,255,.02),0 24px 60px -20px rgba(37,99,235,.45),0 10px 40px -10px rgba(124,58,237,.35);
+  }
+  .field{
+    width:100%;background:var(--field);color:var(--text);
+    border:1px solid var(--line);border-radius:.75rem;padding:.85rem 1rem;font-size:1rem;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .field::placeholder{color:#7F8ACB}
+  .field:focus{outline:none;border-color:#8B9DFF;box-shadow:0 0 0 3px rgba(124,58,237,.35)}
+  select.field{
+    appearance:none;-webkit-appearance:none;padding-right:2.75rem;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23C4B5FD' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .9rem center;
+  }
+  select.field option{background:#0E1433;color:var(--text)}
+  .btn-primary{
+    width:100%;border-radius:.75rem;padding:.9rem 1rem;font-weight:600;color:#fff;
+    background:linear-gradient(135deg,var(--blue),var(--violet));
+    box-shadow:0 10px 30px -10px rgba(124,58,237,.7);
+    transition:transform .15s, filter .15s;
+  }
+  .btn-primary:hover{filter:brightness(1.12)}
+  .btn-primary:active{transform:translateY(1px)}
+  .btn-ghost{
+    width:100%;border-radius:.75rem;padding:.85rem 1rem;font-weight:500;color:var(--text);
+    border:1px solid var(--line);background:transparent;transition:background .15s,border-color .15s;
+  }
+  .btn-ghost:hover{background:rgba(124,58,237,.14);border-color:#6D7BE0}
+  .btn-primary:focus-visible,.btn-ghost:focus-visible{outline:2px solid #C4B5FD;outline-offset:3px}
+  .icon-badge{
+    width:3.5rem;height:3.5rem;border-radius:1rem;display:grid;place-items:center;margin:0 auto 1rem;
+    background:linear-gradient(135deg,rgba(37,99,235,.25),rgba(124,58,237,.30));
+    border:1px solid rgba(139,157,255,.45);
+  }
+  .pin-panel{
+    border-radius:1rem;padding:1.5rem 1rem;text-align:center;
+    background:linear-gradient(180deg,rgba(37,99,235,.14),rgba(124,58,237,.18));
+    border:1px solid rgba(139,157,255,.45);
+    box-shadow:inset 0 0 40px rgba(124,58,237,.18);
+    animation:reveal .35s ease-out;
+  }
+  .pin-value{
+    font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-weight:700;font-size:3.5rem;line-height:1.1;letter-spacing:.3em;padding-left:.3em;
+    background:linear-gradient(90deg,var(--sky),var(--lilac));
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  }
+  @media (min-width:640px){.pin-value{font-size:4.25rem}}
+  @keyframes reveal{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.pin-panel{animation:none}.btn-primary,.btn-ghost,.field{transition:none}}
+</style>
+</head>
+<body class="min-h-screen antialiased">
+<main class="relative min-h-screen flex items-center justify-center p-4">
+
+  <!-- Peringkat 1: Gerbang Keselamatan -->
+  <section id="lockScreen" class="card w-full max-w-sm p-6 sm:p-8">
+    <div class="text-center mb-7">
+      <div class="icon-badge" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+      </div>
+      <h1 class="text-2xl font-bold tracking-tight">RuangKlik SKTKK</h1>
+      <p class="text-sm mt-2 leading-relaxed" style="color:var(--muted)">Masukkan kata laluan untuk membuka portal semakan PIN.</p>
+    </div>
+    <label for="pass" class="block text-sm font-medium mb-2" style="color:var(--text)">Kata laluan</label>
+    <input id="pass" type="password" autocomplete="off" placeholder="Masukkan kata laluan" class="field">
+    <p id="err" class="hidden mt-3 text-sm rounded-lg px-3 py-2" style="color:#FECACA;background:rgba(127,29,29,.45);border:1px solid #B91C1C" role="alert">
+      Kata laluan tidak betul. Sila semak dan cuba lagi.
+    </p>
+    <button id="unlockBtn" class="btn-primary mt-5">Buka Portal</button>
+  </section>
+
+  <!-- Peringkat 2: Semakan PIN -->
+  <section id="checkScreen" class="card hidden w-full max-w-md p-6 sm:p-8">
+    <div class="text-center">
+      <div class="icon-badge" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M14 9l2 2"/></svg>
+      </div>
+      <h1 class="text-xl sm:text-2xl font-bold tracking-tight leading-snug">Portal Semakan PIN Guru &amp; AKP SKTKK</h1>
+      <p class="text-sm mt-2 leading-relaxed" style="color:var(--muted)">Pilih nama anda untuk melihat PIN tempahan bilik.</p>
+    </div>
+
+    <label for="nameSelect" class="block text-sm font-medium mt-7 mb-2">Nama guru / AKP</label>
+    <select id="nameSelect" class="field">
+      <option value="">Pilih nama anda</option>
+    </select>
+
+    <div id="pinCard" class="hidden mt-6">
+      <div class="pin-panel">
+        <p id="pinName" class="text-sm font-medium break-words" style="color:var(--text)"></p>
+        <p class="text-xs mt-3" style="color:var(--muted)">PIN anda</p>
+        <p id="pinValue" class="pin-value mt-1" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <button id="lockBtn" class="btn-ghost mt-6 text-sm">Kunci Semula / Log Keluar</button>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  const ACCESS_PASSWORD = "sktkk2019";
+  const DB = {
+    "Adlina binti Yuskelana": "9687",
+    "Ahmad Aimran bin Abdul Razak": "0293",
+    "Ainin Sofea binti Abd Shukor": "5042",
+    "Aiza binti Mohd Yusof": "9962",
+    "Annah binti Pahaluddin": "0831",
+    "Aszalina binti Abd Rahmat": "5923",
+    "Aziman Zulmajid bin Zainal": "0476",
+    "Aznijah @ Nuradlina binti Saniman": "3438",
+    "Baizuramaszatulana binti Rosli": "3363",
+    "Christina A/P Sebastian": "7187",
+    "Fazliaton binti Mansor": "4991",
+    "Hariyani binti Mohyin": "7580",
+    "Irfan bin Mat": "2102",
+    "Ivory Grace John": "3435",
+    "Junainah binti Basir @ Basri": "0959",
+    "Laili @ Eliana binti Elias": "7055",
+    "Mahana binti Md Ariff": "0416",
+    "Mazlee bin Jumaat": "7988",
+    "Mazlina binti Sukarno": "8656",
+    "Mohamad Farhan bin Mahadi": "5134",
+    "Mohamad Fazle Sabri": "0444",
+    "Mohammad Iman Firdaus bin Mohamed Sukri": "7100",
+    "Mohd Aidil Hakimi bin Mohd Rozi": "9812",
+    "Mohd Faizul Abdullah bin Rahim": "2117",
+    "Mohd Lukman bin Mat Salleh": "0543",
+    "Mohd Rozi bin Jusoh": "9286",
+    "Mohd Shapian bin Mohd Shuzaily": "8513",
+    "Muhammad Fatahuddin bin Osman": "7888",
+    "Muhammad Nazrul Ikhram": "8743",
+    "Nety Hasra binti Mohamed": "6864",
+    "Noor Adzlina binti Adam": "5465",
+    "Nor Athirah binti Mohd Zaini": "0424",
+    "Nor Azrina binti Nor Hadi": "0779",
+    "Nor Azura binti Nor Rozaman": "7134",
+    "Nor Hidayat bin Abu": "4059",
+    "Nor Nisa binti Samian": "1621",
+    "Noraini binti Ismail": "0425",
+    "Norashikin binti Md. Anuar": "5097",
+    "Norasitah binti Ali": "2525",
+    "Norhafizah binti Baharudin": "6223",
+    "Norhayati binti Yusof": "3960",
+    "Norhidayati binti Zulkafli": "7560",
+    "Noriana binti Ibrahim": "0682",
+    "Norliza binti Mohamad Zaham": "9428",
+    "Nur Adni binti Hamdan": "4312",
+    "Nur Azima binti Pantas": "9964",
+    "Nur Huda binti Kamarulzaman": "0542",
+    "Nur Ilham Basyirah binti Nazari": "1157",
+    "Nur Shaherah binti Nazri": "0783",
+    "Nurayuni Maisarah binti Sirdi": "5034",
+    "Nurilham Izzati binti Amerudin": "9373",
+    "Nurmahirah binti A. Rahim": "3478",
+    "Nurul Adawiyah binti Juma'en": "4814",
+    "Nurul Fatiha binti Rosli": "1760",
+    "Nurul I'zzereen binti Zainal": "5987",
+    "Nurul Shamira binti Rahimi": "4960",
+    "Nurul Yushaida Mohamad Yunus": "5462",
+    "Nurzaihah binti Mohd Zamran": "0701",
+    "Perimavathy A/P Kaliopam": "7448",
+    "Rafidah binti Sa'ali": "7151",
+    "Rahimah binti Abdul Rahim": "2576",
+    "Raihana binti Sapuan": "6967",
+    "Roha binti Mohamad": "3021",
+    "Rohaiza binti Abdul Manap": "1219",
+    "Rozieta binti Ramli": "6649",
+    "Ruhaida binti Izazi": "8152",
+    "Sara Deni binti Zulkeflee": "1634",
+    "Shadidy bin Abdul Aziz": "0661",
+    "Shalmeni A/P Nadarajah": "9672",
+    "Siti Aishah binti Othman": "8358",
+    "Siti Fariza binti Mohd Fadzil": "5562",
+    "Siti Hawa binti Marjaya": "7027",
+    "Siti Khadijah binti Mohd Hassan": "7409",
+    "Siti Nadiyah binti Jalani": "5842",
+    "Siti Salha binti Samingan": "3624",
+    "Siti Salwah binti Sa'at @ Isnin": "6118",
+    "Siti Zakiah binti Abdul Kadir": "5294",
+    "Suriya binti Abdul Rahim": "5883",
+    "Suzaimah binti Yusof": "9334",
+    "Thavamani A/P Parati": "4796",
+    "V. Kavitha A/P Vasudevan": "0561",
+    "Yap Siew Ping": "5809",
+    "Zainun binti Yusof": "2983",
+    "Zalzaifulkhafiz bin Sulaiman": "4616",
+    "Zuria binti Mat Kasim": "6237"
+  };
+
+  const $ = id => document.getElementById(id);
+  const lockScreen = $("lockScreen"), checkScreen = $("checkScreen");
+  const pass = $("pass"), err = $("err");
+  const select = $("nameSelect"), pinCard = $("pinCard");
+
+  Object.keys(DB).sort((a, b) => a.localeCompare(b, "ms", { sensitivity: "base" })).forEach(name => {
+    const o = document.createElement("option");
+    o.value = name; o.textContent = name;
+    select.appendChild(o);
+  });
+
+  function unlock() {
+    if (pass.value === ACCESS_PASSWORD) {
+      err.classList.add("hidden");
+      pass.value = "";
+      lockScreen.classList.add("hidden");
+      checkScreen.classList.remove("hidden");
+      select.focus();
+    } else {
+      err.classList.remove("hidden");
+      pass.select();
+    }
+  }
+
+  function lock() {
+    select.value = "";
+    pinCard.classList.add("hidden");
+    $("pinValue").textContent = "";
+    checkScreen.classList.add("hidden");
+    lockScreen.classList.remove("hidden");
+    pass.focus();
+  }
+
+  select.addEventListener("change", () => {
+    const name = select.value;
+    if (name && DB[name] !== undefined) {
+      $("pinName").textContent = name;
+      $("pinValue").textContent = DB[name];
+      pinCard.classList.remove("hidden");
+    } else {
+      pinCard.classList.add("hidden");
+    }
+  });
+
+  $("unlockBtn").addEventListener("click", unlock);
+  pass.addEventListener("keydown", e => { if (e.key === "Enter") unlock(); });
+  pass.addEventListener("input", () => err.classList.add("hidden"));
+  $("lockBtn").addEventListener("click", lock);
+})();
+</script>
+</body>
+</html>
